@@ -1,0 +1,277 @@
+@imgurl:'';
+// http://staticcdn.atchuangke.com/business
+
+// 背景图片地址和大小
+.bg-image(@url){
+  background-image: url("@{imgurl}@{url}@2x.png");
+  @media only screen and (-webkit-min-device-pixel-ratio:3),only screen and(min-device-pixel-ratio:3){
+    background-image: url("@{imgurl}@{url}@3x.png");
+  }
+}
+.border-none(){
+  &::before{
+    display: none;
+  }
+  &::after{
+    display: none;
+  }
+}
+.setBg(@url) {
+  background-image: url('@{imgurl}@{url}');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+//普通设置背景
+.setBgCommon(@url,@type){
+  background: url('@{imgurl}@{url}') @type;
+}
+//flex 布局和 子元素 对其方式
+.setflex(@type1, @type2) {
+  display: flex;
+  justify-content: @type1;
+  align-items: @type2;
+}
+.setBorderRadius(@radius) {
+  -webkit-border-radius: @radius;
+  -moz-border-radius: @radius;
+  -ms-border-radius: @radius;
+  -o-border-radius: @radius;
+  border-radius: @radius;
+}
+//文字多余的用.代替
+.textHidden() {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+// 扩展点击区域
+.extend-click(){
+  position: relative;
+  &:after{
+    content: '';
+    position: absolute;
+    top: -8px;
+    left: -8px;
+    right: -8px;
+    bottom: -8px;
+  }
+}
+.bs-1px-b(@borderColor) {
+  position: relative;
+  &:after{
+    content: '';
+    position: absolute;
+    left:0;
+    right:0;
+    height:1px;
+    bottom:0;
+    color:@borderColor;
+    border-bottom: 1px solid @borderColor;
+    transform-origin: 0 100%;
+    -webkit-transform-origin: 0 100%;
+    transform: scaleY(.5);
+    -webkit-transform: scaleY(.5);
+  }
+}
+.bs-1px-b-type(@borderColor, @type) {
+  position: relative;
+  &:after{
+    content: '';
+    position: absolute;
+    left:0;
+    right:0;
+    height:1px;
+    bottom:0;
+    color:@borderColor;
+    border-bottom: 1px @type @borderColor;
+    transform-origin: 0 100%;
+    -webkit-transform-origin: 0 100%;
+    transform: scaleY(.5);
+    -webkit-transform: scaleY(.5);
+  }
+}
+.bs-1px-t(@borderColor) {
+  position: relative;
+  &:before{
+    content: '';
+    position: absolute;
+    left:0;
+    right:0;
+    height:1px;
+    top:0;
+    color:@borderColor;
+    border-bottom: 1px solid @borderColor;
+    transform-origin: 0 100%;
+    -webkit-transform-origin: 0 100%;
+    transform: scaleY(.5);
+    -webkit-transform: scaleY(.5);
+  }
+}
+
+.bs-1px-r(@borderColor) {
+  position: relative;
+  &:after{
+    content: '';
+    position: absolute;
+    width:1px;
+    right:0;
+    bottom:0;
+    top:0;
+    color:@borderColor;
+    border-right: 1px solid @borderColor;
+    transform-origin:100% 0;
+    -webkit-transform-origin:100% 0;
+    transform: scaleX(.5);
+    -webkit-transform: scaleX(.5);
+  }
+}
+
+.bs-1px-l(@borderColor) {
+  position: relative;
+  &:before{
+    content: '';
+    position: absolute;
+    width:1px;
+    left:0;
+    bottom:0;
+    top:0;
+    color:@borderColor;
+    border-left: 1px solid @borderColor;
+    transform-origin:100% 0;
+    -webkit-transform-origin:100% 0;
+    transform: scaleX(.5);
+    -webkit-transform: scaleX(.5);
+  }
+}
+
+.bs-1px(@borderColor) {
+  position: relative;
+  &:before{
+    content: '';
+    position: absolute;
+    width:200%;
+    height:200%;
+    pointer-events: none;
+    left:0;
+    top:0;
+    color:@borderColor;
+    border: 1px solid @borderColor;
+    transform-origin:left top;
+    -webkit-transform-origin:left top;
+    transform: scale(.5);
+    -webkit-transform: scale(.5);
+  }
+}
+.bs-1px-type(@type,@borderColor, @size) {
+ position: relative;
+  &:before{
+    content: '';
+    position: absolute;
+    pointer-events: none;
+    width:200%;
+    height:200%;
+    left:0;
+    top:0;
+    border-radius:@size;
+    color:@borderColor;
+    border: 1px @type @borderColor;
+    transform-origin:left top;
+    -webkit-transform-origin:left top;
+    transform: scale(.5);
+    -webkit-transform: scale(.5);
+  }
+}
+
+.bs-1px-tr(@borderColor) {
+  position: relative;
+  &:after{
+    content: '';
+    position: absolute;
+    width:1px;
+    right:0;
+    bottom:0;
+    top:0;
+    color:@borderColor;
+    border-right: 1px solid @borderColor;
+    transform-origin:100% 0;
+    -webkit-transform-origin:100% 0;
+    transform: scaleX(.5);
+    -webkit-transform: scaleX(.5);
+  }
+  &:before{
+    content: '';
+    position: absolute;
+    left:0;
+    right:0;
+    height:1px;
+    top:0;
+    color:@borderColor;
+    border-bottom: 1px solid @borderColor;
+    transform-origin: 0 100%;
+    -webkit-transform-origin: 0 100%;
+    transform: scaleY(.5);
+    -webkit-transform: scaleY(.5);
+  }
+}
+
+.bs-1px-bl(@borderColor) {
+  position: relative;
+  &:after{
+    content: '';
+    position: absolute;
+    left:0;
+    right:0;
+    height:1px;
+    bottom:0;
+    color:@borderColor;
+    border-bottom: 1px solid @borderColor;
+    transform-origin: 0 100%;
+    -webkit-transform-origin: 0 100%;
+    transform: scaleY(.5);
+    -webkit-transform: scaleY(.5);
+  }
+  &:before{
+    content: '';
+    position: absolute;
+    width:1px;
+    left:0;
+    bottom:0;
+    top:0;
+    color:@borderColor;
+    border-left: 1px solid @borderColor;
+    transform-origin:100% 0;
+    -webkit-transform-origin:100% 0;
+    transform: scaleX(.5);
+    -webkit-transform: scaleX(.5);
+  }
+}
+
+.radius-border-1px(@size, @borderColor) {
+  position: relative;
+  &:before{
+    content: '';
+    position: absolute;
+    pointer-events: none;
+    width:200%;
+    height:200%;
+    left:0;
+    top:0;
+    border-radius:@size;
+    color:@borderColor;
+    border: 1px solid @borderColor;
+    transform-origin:left top;
+    -webkit-transform-origin:left top;
+    transform: scale(.5);
+    -webkit-transform: scale(.5);
+  }
+}
+
+//多行文字多余的用.代替
+.textHidden_p(@num, @height) {
+  display: -webkit-box;
+  -webkit-line-clamp: @num;
+  -webkit-box-orient: vertical;
+  line-height: @height;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
