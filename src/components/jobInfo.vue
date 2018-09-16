@@ -96,7 +96,7 @@ export default {
   data() {
     return {
       backTitle: '职位详情',
-      imgCdn: this.imgCdn,
+      imgCdn: this.imgCdn || '',
       infoData: {},
       is_romance: false,
       jobCollected: false,
@@ -236,8 +236,8 @@ export default {
             let imgUrl = 'http://test.zhaopin.babyhouse.wang/public/static/images/logo.jpg'
             let title = '门窗幕墙直聘网'
             let desc = `${obj.company.company_name || '未知'}公司正在招人,点击查看`
-            let shareUrl = window.location.href
-            this.wxShare(shareUrl, imgUrl, title, desc, shareUrl)
+            // let shareUrl = window.location.href
+            // this.wxShare(shareUrl, imgUrl, title, desc, shareUrl)
 
             if (obj.company.logo) {
               obj.logoImg = obj.company.logo.small.url

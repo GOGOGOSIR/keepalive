@@ -87,7 +87,10 @@ Vue.use(ScrollNav)
 Vue.use(ScrollNavBar)
 
 Vue.config.productionTip = false
-
+import VueLazyload from 'vue-lazyload'
+Vue.use(VueLazyload, {
+  loading: require('../static/img/loading/1.png')
+})
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

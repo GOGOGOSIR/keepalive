@@ -1,12 +1,12 @@
 // export const address = 'http://test.www.mcmqzpw.com/v1'
-export const address = 'http://www.mcmqzpw.com/v1'
+export const address = 'http://test.www.mcmqzpw.com/v1'
 
 // export const payCallBackUrl = 'http://test.m.mcmqzpw.com'
-export const payCallBackUrl = 'http://m.mcmqzpw.com'
+// export const payCallBackUrl = 'http://m.mcmqzpw.com'
 
 // export const shareurl = 'http://localhost:3002' // switchHost测试地址
 // export const shareurl = 'http://test.m.mcmqzpw.com' // 测试地址
-export const shareurl = 'http://m.mcmqzpw.com' // 正式地址 
+// export const shareurl = 'http://m.mcmqzpw.com' // 正式地址 
 
 export const ERR_OK = 0
 

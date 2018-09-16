@@ -1,17 +1,19 @@
 <template>
   <div class="normalUserHome">
   	<!-- 搜索 -->
-		<div class="search-Box" ref='searchBox' :style='{opacity: searchOpacity}'>
+		<!-- <div class="search-Box" ref='searchBox' :style='{opacity: searchOpacity}'>
 			<div class="search-wraper" @click='goSearch'>
 				<i class="bsIcon icon-sousuo"></i>
 				<span>搜索职位/公司/地区</span>
 			</div>
 			<img :src="imgCdn+'/static/img/er/1.png'" class="erImg" @click='openEr'>
-		</div>
+		</div> -->
+		<!-- 
+			:scroll-events="['scroll']"
+			@scroll='scrolling' 
+		 -->
 	   <cube-scroll :data="list" 
-	   				:scroll-events="['scroll']"
 	   				ref='normalUserScroll'
-	   				@scroll='scrolling' 
 	   				:options='options'
 	   				@pulling-up="onPullingUp"
 	   				@pulling-down="onPullingDown"
@@ -44,13 +46,13 @@
 					</template>
 	   			</cube-slide>
 	   		</div>
-			<div class="title-nH">
+			<!-- <div class="title-nH">
 				<span>职位列表</span>
 				<ul>
 					<li @click='selectSort(0)' :class='{selectActive: sortIndex === 0}'>推荐</li>
 					<li @click='selectSort(1)' :class='{selectActive: sortIndex === 1}'>最新</li>
 				</ul>
-			</div>
+			</div> -->
 			<!-- 列表渲染 -->
 			<ul class="list-wraper">
 				<li v-for='item in list'>
@@ -85,7 +87,7 @@ export default {
 			imgCdn: this.imgCdn || '',
 			showBacktop: false,
 			options: {
-				probeType: 3,
+				probeType: 1,
 				bounce: {
 					top: true,
 					bottom: true,
@@ -117,35 +119,34 @@ export default {
 	created() {
 		console.log('home的created')
 		this.path = this.$route.name
-		this._getBanner()
+		// this._getBanner()
 		this._getJobList('recommend', 0, this.limits)
 	},
 	activated () {
 		console.log('home的active')
-		
-		// this.$refs.normalUserScroll.scrollTo(0,this.beforeTop)
-		// this.$refs.normalUserScroll.scroll.startY = this.beforeTop
+		console.log('初始化的startY:', this.beforeTop)
+		this.$refs.normalUserScroll.scrollTo(0,this.beforeTop,0)
 	},
 	watch: {
 		type(newType) {
-			jobList(newType,0,this.limits).then((res) => {
-				if (res.error_code == 0) {
-					if (res.data.list) {
-						for (let item of res.data.list) {
-							item.min_money = parseInt(item.min_salary/1000)
-							item.max_money = parseInt(item.max_salary/1000)
-							item.time = dealDateYM(item.update_time)
-							if (item.company.logo) {
-	    						item.logoImg = item.company.logo.small.url
-	    					} else {
-	    						item.logoImg = item.company.default_logo
-	    					}
-						}
-						this.list = res.data.list
-						this.start += this.limits
-					}
-				}
-			})
+			// jobList(newType,0,this.limits).then((res) => {
+			// 	if (res.error_code == 0) {
+			// 		if (res.data.list) {
+			// 			for (let item of res.data.list) {
+			// 				item.min_money = parseInt(item.min_salary/1000)
+			// 				item.max_money = parseInt(item.max_salary/1000)
+			// 				item.time = dealDateYM(item.update_time)
+			// 				if (item.company.logo) {
+	    	// 					item.logoImg = item.company.logo.small.url
+	    	// 				} else {
+	    	// 					item.logoImg = item.company.default_logo
+	    	// 				}
+			// 			}
+			// 			this.list = res.data.list
+			// 			this.start += this.limits
+			// 		}
+			// 	}
+			// })
 		},
 		$route(to,from){
 			// console.log(this.$route, 'home')
@@ -272,9 +273,10 @@ export default {
 			}
 		},
 		selectItem(data) {
-			// this.beforeTop = this.$refs.normalUserScroll.scroll.startY
+			this.beforeTop = this.$refs.normalUserScroll.scroll.startY
+			console.log('离开前的startY:', this.beforeTop)
 			// console.log(this.beforeTop , '+++====++++')
-			this.$router.push({name: 'jobInfo', query: {jobId: data.id, map: 'map'}})
+			this.$router.push({name: 'page', query: {jobId: data.id, map: 'map'}})
 		} 
 	},
 	components: {
@@ -288,7 +290,7 @@ export default {
 .normalUserHome{
 	position: fixed;
 	top: 0;
-	bottom: 48px;
+	bottom: 0px;
 	background: @gray-bg;
 	width: 100%;
 	.scroll-wrapper{
